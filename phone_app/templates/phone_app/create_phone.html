@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'create_phone' %}" method="post">
+    {% csrf_token %}
+    {{ create_form.as_p }}
+    {% if creat_form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field , errors in creat_form.errors.items %}
+                    {% for error in errors %}
+                        <li>
+                            {{ field }} : {{ error }}
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %} 
+    <button type="submit">Create</button>
+</form>
+<a href="{% url 'phone_list' %}">
+    <button type="button">
+        See All Phones
+    </button>
+</a>
+</body>
+</html>

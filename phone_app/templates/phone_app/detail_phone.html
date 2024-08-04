@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Phone</title>
+</head>
+<body>
+    <h1>{{ phone.brand.brand_name }} {{ phone.model_name }}</h1>
+    <p><strong>Color:</strong> {{ phone.color }}</p>
+    <p><strong>Screen Size:</strong> {{ phone.screen_size }} inches</p>
+    <p><strong>Price:</strong> ${{ phone.price }}</p>
+    <p><strong>Region:</strong> {{ phone.region }}</p>
+    <p><strong>Inventory Status:</strong> {{ phone.inventory_status|yesno:"In Stock,Out of Stock" }}</p>
+
+    <h2>Update Phone</h2>
+    <form method="post" action="{% url 'phone_detail' slug=phone.slug %}">
+        {% csrf_token %}
+        {{ update_form.as_p }}
+        <button type="submit" name="update">Update</button>
+    </form>
+
+    <h2>Delete Phone</h2>
+    <form method="post" action="{% url 'phone_detail' slug=phone.slug %}">
+        {% csrf_token %}
+        <button type="submit" name="delete">Delete</button>
+    </form>
+
+    <a href="{% url 'phone_list' %}"><button type="button">Phone List</button></a>
+</body>
+</html>

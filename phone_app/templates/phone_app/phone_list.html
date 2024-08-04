@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone List</title>
+</head>
+<body>
+    <h1>Phone List</h1>
+
+    <form method="get">
+        {{ phone_filter_form.as_p }}
+        <button type="submit">Filter</button>
+    </form>
+
+    <ul>
+        {% for phone in phones %}
+            <li>
+                {{ phone.brand.brand_name }} - {{ phone.model_name }} - {{ phone.color }} - ${{ phone.price }} - {{ phone.screen_size }} inches - {{ phone.region }} - {% if phone.inventory_status %}Available{% else %}Not Available{% endif %}
+            </li>
+        {% empty %}
+            <li>No phones found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
